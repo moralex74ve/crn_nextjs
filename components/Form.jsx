@@ -96,7 +96,7 @@ const Form = ({ formData, forNewMovie = true }) => {
       <input
         className="form-control my-2"
         type="text"
-        placeholder="Title"
+        placeholder="Nombre"
         autoComplete="off"
         name="nombre"
         value={form.nombre}
