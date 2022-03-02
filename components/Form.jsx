@@ -6,8 +6,8 @@ const Form = ({ formData, forNewMovie = true }) => {
   const router = useRouter();
 
   const [form, setForm] = useState({
-    title: formData.title,
-    plot: formData.plot,
+    nombre: formData.nombre,
+    apellido: formData.apellido,
   });
   const [message, setMenssage] = useState([]);
 
@@ -33,7 +33,7 @@ const Form = ({ formData, forNewMovie = true }) => {
     setMenssage([]);
     const { id } = router.query;
     try {
-      const res = await fetch(`/api/movie/${id}`, {
+      const res = await fetch(`/api/oveja/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -64,7 +64,7 @@ const Form = ({ formData, forNewMovie = true }) => {
   const postData = async (form) => {
     try {
       console.log(form);
-      const res = await fetch("/api/movie", {
+      const res = await fetch("/api/oveja", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -98,8 +98,8 @@ const Form = ({ formData, forNewMovie = true }) => {
         type="text"
         placeholder="Title"
         autoComplete="off"
-        name="title"
-        value={form.title}
+        name="nombre"
+        value={form.nombre}
         onChange={handleChange}
       />
       <input
@@ -107,8 +107,8 @@ const Form = ({ formData, forNewMovie = true }) => {
         type="text"
         placeholder="Plot"
         autoComplete="off"
-        name="plot"
-        value={form.plot}
+        name="apellido"
+        value={form.apellido}
         onChange={handleChange}
       />
       <button className="btn btn-primary w-100" type="submit">

@@ -1,11 +1,14 @@
 import Head from "next/head";
 import Link from "next/link";
+import React, { useState } from 'react';
 
 import conectarDB from "../lib/dbConnect";
-import Movie from "../models/Movie";
+//import Movie from "../models/Movie";
+import Oveja from "../models/Oveja";
 
 export default function Home({ movies }) {
   console.log(movies);
+  const [count, setCount] = useState(0);
   return (
     <div>
       <Head>
@@ -15,21 +18,54 @@ export default function Home({ movies }) {
       </Head>
 
       <main className="container">
-        <h1>Movies</h1>
+      <div className="card">
+        <div className="card-header">
+        <h1 className="text-center" >Comunidad del Rey</h1>
+        </div>
+        <div className="card-body">
+        
         <Link href="/new">
           <a className="btn btn-primary w-100 mb-2">Agregar</a>
         </Link>
-        {movies.map(({ _id, title, plot }) => (
-          <div className="card mb-2" key={_id}>
-            <div className="card-body">
-              <div className="h5 text-uppercase">{title}</div>
-              <p className="fw-light">{plot}</p>
-              <Link href={`/${_id}`}>
+        <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre y Apellido</th>
+                <th scope="col">Cedula</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">...</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            {movies.map(({ _id, nombre, apellido,cedula,tel2,tel1 }) => (
+              <tr key={_id}>
+              <th scope="row" ></th>
+                <td>{nombre} - {apellido} </td>
+                <td>{cedula}</td>
+                <td>{tel2}</td>
+                <td>
+                <Link href={`/${_id}`}>
                 <a className="btn btn-success btn-sm">Más info...</a>
               </Link>
-            </div>
-          </div>
-        ))}
+                </td>
+              </tr>
+                
+              ))
+                
+              }
+            </tbody>
+          </table>
+        
+       
+          
+        </div>
+        <div className="card-footer text-muted">
+          2 days ago
+        </div>
+      </div>
+
       </main>
     </div>
   );
@@ -39,10 +75,11 @@ export async function getServerSideProps() {
   try {
     await conectarDB();
 
-    const res = await Movie.find({});
+    const res = await Oveja.find({});
 
     const movies = res.map((doc) => {
       const movie = doc.toObject();
+      movie.nacio=`${movie.nacio};`
       movie._id = `${movie._id}`;
       return movie;
     });

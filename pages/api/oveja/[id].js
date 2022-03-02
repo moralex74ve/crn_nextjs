@@ -1,22 +1,22 @@
 import conectarDB from "../../../lib/dbConnect";
-import Movie from "../../../models/Movie";
+import Oveja from "../../../models/Oveja";
 
 export default async function handler(req, res) {
   await conectarDB();
 
-  // GET api/movie/:id (obtener un id y listarlo)
+  // GET    api/movie/:id (obtener un id y listarlo)
   // DELETE api/movie/:id (elimina un doc con id)
-  // PUT api/movie/:id (modificar un doc con id)
+  // PUT    api/movie/:id (modificar un doc con id)
 
   const {
     method,
     query: { id },
   } = req;
-
+    
   switch (method) {
     case "PUT":
       try {
-        const movie = await Movie.findByIdAndUpdate(id, req.body, {
+        const movie = await Oveja.findByIdAndUpdate(id, req.body, {
           new: true,
           runValidators: true,
         });
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
       }
     case "DELETE":
       try {
-        const movie = await Movie.findByIdAndDelete(id);
+        const movie = await Oveja.findByIdAndDelete(id);
         if (!movie) {
           return res.status(404).json({ success: false });
         }
@@ -41,7 +41,7 @@ export default async function handler(req, res) {
       }
     case "GET":
       try {
-        const movie = await Movie.findById(id).lean();
+        const movie = await Oveja.findById(id).lean();
         if (!movie) {
           return res.status(404).json({ success: false });
         }

@@ -1,11 +1,12 @@
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import conectarDB from "../../lib/dbConnect";
-import Movie from "../../models/Movie";
+//import Movie from "../../models/Movie";
+import Oveja from "../../models/Oveja";
 
 const MoviePage = ({ success, error, movie }) => {
   const router = useRouter();
-
+  
   if (!success) {
     return (
       <div className="container text-center my-5">
@@ -20,7 +21,7 @@ const MoviePage = ({ success, error, movie }) => {
 
   const deleteData = async (id) => {
     try {
-      await fetch(`/api/movie/${id}`, {
+      await fetch(`/api/oveja/${id}`, {
         method: "DELETE",
       });
       router.push("/");
@@ -35,9 +36,9 @@ const MoviePage = ({ success, error, movie }) => {
       <div className="card">
         <div className="card-body">
           <div className="card-title">
-            <h5 className="text-uppercase">{movie.title}</h5>
+            <h5 className="text-uppercase">{movie.nombre}</h5>
           </div>
-          <p className="fw-light">{movie.plot}</p>
+          <p className="fw-light">{movie.apellido}</p>
           <Link href="/">
             <a className="btn btn-success btn-sm me-2">Volver...</a>
           </Link>
@@ -62,7 +63,7 @@ export async function getServerSideProps({ params }) {
   try {
     await conectarDB();
 
-    const movie = await Movie.findById(params.id).lean();
+    const movie = await Oveja.findById(params.id).lean();
 
     if (!movie) {
       return { props: { success: false, error: "pelicula no encontrada" } };

@@ -25,12 +25,12 @@ const EditMovie = () => {
   const { id } = router.query;
 
   const { data: movie, error } = useSWR(
-    id ? `/api/movie/${id}` : null,
+    id ? `/api/oveja/${id}` : null,
     fetcher
   );
 
   if (error) {
-    return <div>Error</div>;
+    return <div>Error Encontrado</div>;
   }
 
   if (!movie) {
@@ -42,8 +42,8 @@ const EditMovie = () => {
   }
 
   const formData = {
-    title: movie.title,
-    plot: movie.plot,
+    nombre: movie.nombre,
+    apellido: movie.apellido,
   };
 
   return (

@@ -1,5 +1,6 @@
 import conectarDB from "../../../lib/dbConnect";
-import Movie from "../../../models/Movie";
+//import Movie from "../../../models/Movie";
+import Oveja from "../../../models/Oveja";
 
 export default async function handler(req, res) {
   await conectarDB();
@@ -10,7 +11,7 @@ export default async function handler(req, res) {
   switch (method) {
     case "POST":
       try {
-        const movie = new Movie(req.body);
+        const movie = new Oveja(req.body);
         await movie.save();
 
         return res.status(200).json({ success: true, movie });
