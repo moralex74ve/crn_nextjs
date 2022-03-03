@@ -33,7 +33,7 @@ export default function Home({ movies }) {
                 <th scope="col">#</th>
                 <th scope="col">Nombre y Apellido</th>
                 <th scope="col">Cedula</th>
-                <th scope="col">Telefono</th>
+                <th scope="col">Telefono.</th>
                 <th scope="col">...</th>
               </tr>
             </thead>
