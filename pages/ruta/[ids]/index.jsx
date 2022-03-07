@@ -1,55 +1,39 @@
-import Head from "next/head";
+import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
-import React, { useState } from 'react';
+import Head from "next/head";
+import conectarDB from "../../../lib/dbConnect";
+//import Movie from "../../models/Movie";
+import Oveja from "../../../models/Oveja";
 
-import conectarDB from "../lib/dbConnect";
-//import Movie from "../models/Movie";
-import Oveja from "../models/Oveja";
 
-export default function Home({ movies }) {
-  console.log(movies);
-  const [count, setCount] = useState(0);
-  const [texto, setTexto] = useState('');
-
-  const Filtrando = () => {
-    setTexto(document.getElementById('texto').value)
-    console.log(texto)
-}
+const MoviePage = ({ success, error, movie }) => {
+  const router = useRouter();
   
-  const putData = async (form) => {
-    setMenssage([]);
-    const { id } = router.query;
+  if (!success) {
+    return (
+      <div className="container text-center my-5">
+        <h1>{error} 🤦‍♂️</h1>
+
+        <Link href="/">
+          <a className="btn btn-success">Volver...</a>
+        </Link>
+      </div>
+    );
+  }
+
+  const deleteData = async (id) => {
     try {
-      const res = await fetch(`/api/oveja/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(form),
+      await fetch(`/api/oveja/${id}`, {
+        method: "DELETE",
       });
-
-      const data = await res.json();
-
-      if (!data.success) {
-        for (const key in data.error.errors) {
-          let error = data.error.errors[key];
-          setMenssage((oldmenssage) => [
-            ...oldmenssage,
-            { message: error.message },
-          ]);
-        }
-      } else {
-        setMenssage([]);
-        router.push("/");
-      }
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
   };
- 
 
   return (
-    <div>
+      <div>
       <Head>
         <title>Create Next App</title>
         <meta name="viewport" content="width=device-width, initial-scale=.5" />
@@ -67,18 +51,6 @@ export default function Home({ movies }) {
         <Link href="/new">
           <a className="btn btn-primary w-100 mb-2">Agregar</a>
         </Link>
-
-          <form >
-            <div className="form-group">
-              <label >Filtrar</label>
-              <input type="text" className="form-control" id="texto" onChange={Filtrando} placeholder="Enter Filtro" />
-            </div>
-            
-            <Link href={`/${texto}/busqueda`}>
-            <a className="btn btn-warning btn-sm me-2">Filtrar</a>
-          </Link>
-          </form>
-
         <div className="table-responsive">
         <table className="table table-responsive">
             <thead>
@@ -99,7 +71,7 @@ export default function Home({ movies }) {
                 <td><strong>{cedula} </strong></td>
                 <td>{tel2}</td>
                 <td>
-                <Link href={`${_id}`}>
+                <Link href={`/${_id}`}>
                 <a className="btn btn-success btn-xs">Más info...</a>
               </Link>
                 </td>
@@ -123,25 +95,38 @@ export default function Home({ movies }) {
       </main>
     </div>
   );
-}
+};
 
-export async function getServerSideProps() {
+export default MoviePage;
+
+export async function getServerSideProps({ params }) {
   try {
     await conectarDB();
 
-    const res = await Oveja.find({}).sort({nombre: 1, apellido: 1});
+    /*const xmovie = await Oveja.findById(params.id).lean();*/
+    const { texto } = req.params 
+    const movie = await Oveja.find(
+      { $or: [ 
+          {nombre: { $regex: `${texto}`, $options: 'i'}}, 
+          {apellido: { $regex: `${texto}`, $options: 'i'}},
+          {cedula: { $regex: `${texto}`, $options: 'i'}} 
+            ] })
+            
+    /*res.json( tasks )*/
 
-    const movies = res.map((doc) => {
-      const movie = doc.toObject();
-      movie.nacio=`${movie.nacio};`
-      movie._id = `${movie._id}`;
-      return movie;
-    });
+    if (!movie) {
+      return { props: { success: false, error: "pelicula no encontrada" } };
+    }
 
-    // console.log(res)
+    console.log(movie);
+    movie._id = `${movie._id}`;
 
-    return { props: { movies } };
+    return { props: { success: true, movie } };
   } catch (error) {
     console.log(error);
+    if (error.kind === "ObjectId") {
+      return { props: { success: false, error: "id no válido" } };
+    }
+    return { props: { success: false, error: "Error de servidor" } };
   }
 }

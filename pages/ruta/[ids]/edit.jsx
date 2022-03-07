@@ -3,7 +3,6 @@ import useSWR from "swr";
 import { useRouter } from "next/dist/client/router";
 
 const fetcher = async (url) => {
-  console.log(url)
   const res = await fetch(url);
 
   // If the status code is not in the range 200-299,
