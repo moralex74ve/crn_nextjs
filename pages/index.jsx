@@ -9,10 +9,10 @@ import Oveja from "../models/Oveja";
 export default function Home({ movies }) {
   console.log(movies);
   const [count, setCount] = useState(0);
-  const [texto, setTexto] = useState('');
+  const [texto, setTexto] = useState('a');
 
   const Filtrando = () => {
-    setTexto(document.getElementById('texto').value)
+    setTexto(document.getElementById('xtexto').value)
     console.log(texto)
 }
   
@@ -71,7 +71,7 @@ export default function Home({ movies }) {
           <form >
             <div className="form-group">
               <label >Filtrar</label>
-              <input type="text" className="form-control" id="texto" onChange={Filtrando} placeholder="Enter Filtro" />
+              <input type="text" className="form-control" id="xtexto" onChange={Filtrando} placeholder="Enter Filtro" />
             </div>
             
             <Link href={`/${texto}/busqueda`}>
