@@ -45,6 +45,15 @@ const EditMovie = () => {
   const formData = {
     nombre: movie.nombre,
     apellido: movie.apellido,
+    cedula: movie.cedula,
+    nacio: movie.nacio,
+    mail: movie.mail,
+    direccion: movie.direccion,
+    tel1: movie.tel1,
+    tel2: movie.tel2,
+    status:movie.status,
+    listado:movie.listado,
+    nota:movie.nota
   };
 
   return (

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 import React, { useState } from 'react';
 
-const Datos = ({ movies}) => {
+const Datos = ({movies}) => {
 return(
     <div>
       <Head>
@@ -15,14 +15,7 @@ return(
 
       <main className="container" >
       <div className="card">
-        <div className="card-header">
-        <h1 className="text-center" >Comunidad del Rey</h1>
-        </div>
         <div className="card-body">
-        
-        <Link href="/new">
-          <a className="btn btn-primary w-100 mb-2">Agregar</a>
-        </Link>
         <div className="table-responsive">
         <table className="table table-responsive">
             <thead>
