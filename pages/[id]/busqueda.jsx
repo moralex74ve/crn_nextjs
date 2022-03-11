@@ -6,7 +6,7 @@ import { useRouter } from "next/dist/client/router";
 
 const fetcher = async (url) => {
   const res = await fetch(url);
-  console.log(url)
+  
   // If the status code is not in the range 200-299,
   // we still try to parse and throw it.
   if (!res.ok) {
@@ -24,7 +24,6 @@ const fetcher = async (url) => {
 const EditMovie = () => {
   const router = useRouter();
   const { id } = router.query;
-    console.log(id)
   const { data: movie, error } = useSWR(
     id ? `/api/oveja/ruto/${id}` : null,
     fetcher

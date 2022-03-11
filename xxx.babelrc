@@ -1,0 +1,9 @@
+{
+    "presets": [
+        "xxxnext/babel"
+    ],
+    "plugins": [
+    
+    "xxxsuperjson-next" // 👈
+    ]
+}

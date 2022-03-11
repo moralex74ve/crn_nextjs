@@ -116,7 +116,7 @@ const Form = ({ formData, forNewMovie = true }) => {
       <input
         className="form-control my-2"
         type="text"
-        placeholder="Nombre"
+        placeholder="Apellido"
         autoComplete="off"
         name="apellido"
         value={form.apellido}
@@ -126,10 +126,28 @@ const Form = ({ formData, forNewMovie = true }) => {
       <input
         className="form-control my-2"
         type="text"
-        placeholder="Plot"
+        placeholder="Cedula"
         autoComplete="off"
         name="cedula"
         value={form.cedula}
+        onChange={handleChange}
+      />
+      <input
+        className="form-control my-2"
+        type="text"
+        placeholder="Celular"
+        autoComplete="off"
+        name="tel2"
+        value={form.tel2}
+        onChange={handleChange}
+      />
+      <input
+        className="form-control my-2"
+        type="text"
+        placeholder="Telefono Otro"
+        autoComplete="off"
+        name="tel1"
+        value={form.tel1}
         onChange={handleChange}
       />
       <input
@@ -159,24 +177,8 @@ const Form = ({ formData, forNewMovie = true }) => {
         value={form.direccion}
         onChange={handleChange}
       />
-      <input
-        className="form-control my-2"
-        type="text"
-        placeholder="Plot"
-        autoComplete="off"
-        name="tel1"
-        value={form.tel1}
-        onChange={handleChange}
-      />
-      <input
-        className="form-control my-2"
-        type="text"
-        placeholder="Plot"
-        autoComplete="off"
-        name="tel2"
-        value={form.tel2}
-        onChange={handleChange}
-      />
+      
+      
       <input
         className="form-control my-2"
         type="text"

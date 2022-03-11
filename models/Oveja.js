@@ -5,7 +5,7 @@ const OvejaSchema = new Schema({
   nombre: { type: String},
   apellido: { type: String },
   cedula:{ type: String },
-  nacio: { type: Date },
+  nacio: { type: String },
   mail: { type: String },
   direccion: { type: String },
   tel1: { type: String },
