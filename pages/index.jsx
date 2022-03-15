@@ -63,16 +63,15 @@ export default function Home({ movies }) {
       <div className="card">
         
         <div className="card-body">
-        
-          <form >
+          <form className="form-inline" >
             <div className="form-group">
               <label >Filtrar</label>
               <input type="text" className="form-control" id="xtexto" onChange={Filtrando} placeholder="Nombre o Cedula a Buscar" />
             </div>
             
-            <Link href={`/${texto}/busqueda`}>
-            <a className="btn btn-warning btn-sm me-2">Filtrar</a>
-            </Link>
+              <Link href={`/${texto}/busqueda`}>
+              <a className="btn btn-warning btn-sm me-1 text-wrap" >Filtrar</a>
+              </Link>
             <br />
           </form>
         <Lista movies={movies}/>

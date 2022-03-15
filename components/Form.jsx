@@ -2,9 +2,10 @@ import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import { useState } from "react";
 
+
 const Form = ({ formData, forNewMovie = true }) => {
   const router = useRouter();
-
+  
   const [form, setForm] = useState({
     nombre: formData.nombre,
     apellido: formData.apellido,
@@ -39,7 +40,18 @@ const Form = ({ formData, forNewMovie = true }) => {
       putData(form);
     }
   };
-
+  const deleteData = async (form) => {
+    setMenssage([]);
+    const { id } = router.query;
+    try {
+      await fetch(`/api/oveja/${id}`, {
+        method: "DELETE",
+      });
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const putData = async (form) => {
     setMenssage([]);
     const { id } = router.query;
@@ -122,7 +134,6 @@ const Form = ({ formData, forNewMovie = true }) => {
         value={form.apellido}
         onChange={handleChange}
       />
-      
       <input
         className="form-control my-2"
         type="text"
@@ -177,8 +188,6 @@ const Form = ({ formData, forNewMovie = true }) => {
         value={form.direccion}
         onChange={handleChange}
       />
-      
-      
       <input
         className="form-control my-2"
         type="text"
@@ -206,12 +215,23 @@ const Form = ({ formData, forNewMovie = true }) => {
         value={form.listado}
         onChange={handleChange}
       />
-      <button className="btn btn-primary w-100" type="submit">
-        {forNewMovie ? "Agregar" : "Editar"}
-      </button>
       <Link href="/">
         <a className="btn btn-warning w-100 my-2">Volver...</a>
       </Link>
+      <div className="text-center">
+        <button className="btn btn-primary w-50" type="submit">
+          {forNewMovie ? "Agregar" : "Guardar Cambios"}
+        </button>
+
+        <button
+          className="btn btn-danger w-50"
+          onClick={() => deleteData(form._id)}
+        >
+          Eliminar
+        </button>
+      </div>
+      
+
       {message.map(({ message }) => (
         <p key={message}>{message}</p>
       ))}

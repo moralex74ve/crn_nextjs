@@ -1,12 +1,12 @@
 import Head from "next/head";
-import Lista from "../../components/Lista"
+import Lista from "../../components/Lista";
 import Link from "next/link";
 import useSWR from "swr";
 import { useRouter } from "next/dist/client/router";
 
 const fetcher = async (url) => {
   const res = await fetch(url);
-  
+
   // If the status code is not in the range 200-299,
   // we still try to parse and throw it.
   if (!res.ok) {
@@ -41,12 +41,9 @@ const EditMovie = () => {
     );
   }
 
-  
-
   return (
-    
     <div className="container">
-        <Lista movies={movie}></Lista>
+      <Lista movies={movie}></Lista>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { useRouter } from "next/dist/client/router";
+import Form from "../../components/Form";
 import Link from "next/link";
 import conectarDB from "../../lib/dbConnect";
 //import Movie from "../../models/Movie";
@@ -19,40 +20,12 @@ const MoviePage = ({ success, error, movie }) => {
     );
   }
 
-  const deleteData = async (id) => {
-    try {
-      await fetch(`/api/oveja/${id}`, {
-        method: "DELETE",
-      });
-      router.push("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
+    
     <div className="container">
       <h1>Detalle de Movie</h1>
-      <div className="card">
-        <div className="card-body">
-          <div className="card-title">
-            <h5 className="text-uppercase">{movie.nombre}</h5>
-          </div>
-          <p className="fw-light">{movie.apellido}</p>
-          <Link href="/">
-            <a className="btn btn-success btn-sm me-2">Volver...</a>
-          </Link>
-          <Link href={`/${movie._id}/edit`}>
-            <a className="btn btn-warning btn-sm me-2">Editar</a>
-          </Link>
-          <button
-            className="btn btn-danger btn-sm"
-            onClick={() => deleteData(movie._id)}
-          >
-            Eliminar
-          </button>
-        </div>
-      </div>
+      <Form forNewMovie={false} formData={movie}></Form>
+    
     </div>
   );
 };
