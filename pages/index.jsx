@@ -1,4 +1,5 @@
-import { useRouter } from "next/dist/client/router";
+//import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router"
 import { getSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState, useEffect } from 'react';
