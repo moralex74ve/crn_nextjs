@@ -1,5 +1,4 @@
 import conectarDB from "../../../lib/dbConnect";
-//import Movie from "../../../models/Movie";
 import Oveja from "../../../models/Oveja";
 
 export default async function handler(req, res) {

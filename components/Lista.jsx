@@ -1,12 +1,9 @@
-import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
-import Head from "next/head";
 import React, { useState } from 'react';
 
 const Datos = ({movies}) => {
 return(
     <div>
-      
       <main className="container" >
       <div className="card">
         <div className="card-body">

@@ -2,7 +2,6 @@ import { useRouter } from "next/dist/client/router";
 import Form from "../../components/Form";
 import Link from "next/link";
 import conectarDB from "../../lib/dbConnect";
-//import Movie from "../../models/Movie";
 import Oveja from "../../models/Oveja";
 
 const MoviePage = ({ success, error, movie }) => {
@@ -23,9 +22,8 @@ const MoviePage = ({ success, error, movie }) => {
   return (
     
     <div className="container">
-      <h1>Detalle de Movie</h1>
+      <h1 className="text-center">Datos del Hermano</h1>
       <Form forNewMovie={false} formData={movie}></Form>
-    
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import Form from "../../components/Form";
 import useSWR from "swr";
 import { useRouter } from "next/dist/client/router";
+import Nav from "../../components/Navbar";
 
 const fetcher = async (url) => {
   console.log(url)
@@ -57,10 +58,11 @@ const EditMovie = () => {
   };
 
   return (
+    <>
     <div className="container">
       <h1>Editar Movie</h1>
       <Form forNewMovie={false} formData={formData}></Form>
-    </div>
+    </div></>
   );
 };
 
