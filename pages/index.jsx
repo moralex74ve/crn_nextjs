@@ -1,5 +1,5 @@
-//import { useRouter } from "next/dist/client/router";
-import { useRouter } from "next/router"
+import { useRouter } from "next/dist/client/router";
+//import { useRouter } from "next/router"
 import { getSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState, useEffect } from 'react';
@@ -70,7 +70,9 @@ export default function Home({ movies,seccion }) {
                 </label>
                 <button
                   className="btn btn-danger btn-sm"
-                  onClick={() => router.push("/api/auth/signout")}
+                  onClick={() =>
+                    router.push("https://crn-nextjs.vercel.app/api/auth/signin")
+                  }
                 >
                   <span className="badge badge-secondary">Salir</span>
                 </button>
