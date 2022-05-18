@@ -68,16 +68,9 @@ export default function Home({ movies,seccion }) {
                 <label className="fw-bold">
                   Usuario: {seccion.user.name} ...{" "}
                 </label>
-                <button
-                  className="btn btn-danger btn-sm"
-                  onClick={() => router.push("/api/auth/signout")}
-                >
-                  <span className="badge badge-secondary">Salir</span>
-                </button>
+                
                 <Link href={`https://crn-nextjs.vercel.app/api/auth/signout`}>
-                  <a className="btn btn-warning btn-sm me-1 text-wrap">
-                    Filtrar
-                  </a>
+                  <a className="btn btn-danger btn-sm">Cerrar Seccion</a>
                 </Link>
                 <br />
                 <label>Filtrar:</label>
