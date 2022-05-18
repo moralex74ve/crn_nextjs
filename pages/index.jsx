@@ -71,7 +71,8 @@ export default function Home({ movies,seccion }) {
                 <button
                   className="btn btn-danger btn-sm"
                   onClick={() =>
-                    router.push("https://crn-nextjs.vercel.app/api/auth/signin")
+                    router.push("/api/auth/signout")
+                    
                   }
                 >
                   <span className="badge badge-secondary">Salir</span>
